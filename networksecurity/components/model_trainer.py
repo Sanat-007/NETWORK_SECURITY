@@ -17,6 +17,7 @@ from sklearn.ensemble import RandomForestClassifier,GradientBoostingClassifier,A
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import r2_score
 
+import mlflow
 
 
 class ModelTrainer:
@@ -24,6 +25,22 @@ class ModelTrainer:
         try:
             self.model_trainer_config = model_trainer_config
             self.data_transformation_artifact = data_transformation_artifact
+
+        except Exception as e:
+            raise NetworkSecurityException(e, sys)   #type: ignore
+    
+    def track_mlflow(self,best_model,train_classification_metrics):
+        try:
+            with mlflow.start_run():
+                f1_score = train_classification_metrics.f1_score
+                precision_score = train_classification_metrics.precision_score
+                recall_score = train_classification_metrics.recall_score
+
+                mlflow.log_metric("f1_score", f1_score)
+                mlflow.log_metric("precision_score", precision_score)
+                mlflow.log_metric("recall_score", recall_score)
+                mlflow.sklearn.log_model(best_model, "model")           #type: ignore
+                
 
         except Exception as e:
             raise NetworkSecurityException(e, sys)   #type: ignore
@@ -41,21 +58,21 @@ class ModelTrainer:
             params={
             "Decision Tree": {
                 'criterion':['gini', 'entropy', 'log_loss'],
-                # 'splitter':['best','random'],
-                # 'max_features':['sqrt','log2'],
+                'splitter':['best','random'],
+                'max_features':['sqrt','log2'],
             },
             "Random Forest":{
-                # 'criterion':['gini', 'entropy', 'log_loss'],
+                'criterion':['gini', 'entropy', 'log_loss'],
                 
-                # 'max_features':['sqrt','log2',None],
+                'max_features':['sqrt','log2',None],
                 'n_estimators': [8,16,32,128,256]
             },
             "Gradient Boosting":{
-                # 'loss':['log_loss', 'exponential'],
+                'loss':['log_loss', 'exponential'],
                 'learning_rate':[.1,.01,.05,.001],
                 'subsample':[0.6,0.7,0.75,0.85,0.9],
-                # 'criterion':['squared_error', 'friedman_mse'],
-                # 'max_features':['auto','sqrt','log2'],
+                'criterion':['squared_error', 'friedman_mse'],
+                'max_features':['auto','sqrt','log2'],
                 'n_estimators': [8,16,32,64,128,256]
             },
             "Logistic Regression":{},
@@ -63,7 +80,7 @@ class ModelTrainer:
                 'learning_rate':[.1,.01,.001],
                 'n_estimators': [8,16,32,64,128,256]
             }
-            
+             
             }
 
             model_report:dict = evaluate_models(x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, models=models, params=params)
@@ -82,9 +99,13 @@ class ModelTrainer:
 
             train_classification_metrics = get_classification_score(y_true=y_train,y_pred=y_train_pred)
             
-            ## Track the mlflow metrics
+            ## Track the experiment in mlflow
+            self.track_mlflow(best_model,train_classification_metrics)
+
             y_test_pred = best_model.predict(x_test)
             test_classification_metrics = get_classification_score(y_true=y_test,y_pred=y_test_pred)
+
+            self.track_mlflow(best_model,test_classification_metrics)
 
             preprocessor = load_object(file_path=self.data_transformation_artifact.preprocessor_object_file_path)
 

@@ -8,6 +8,7 @@ scikit-learn
 pyaml
 pickle
 dill
+mlflow
 
 
 ##-e .

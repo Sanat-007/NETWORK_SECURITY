@@ -1,0 +1,35 @@
+[ 2026-05-28 22:46:00,959 ] 15 root - INFO - Initiate the data ingestion
+[ 2026-05-28 22:47:17,062 ] 70 root - INFO - Performed train test split on the dataframe
+[ 2026-05-28 22:47:17,062 ] 72 root - INFO - Exited split_data_as_train_test method of Data_Ingestion class
+[ 2026-05-28 22:47:17,063 ] 80 root - INFO - Expoting train and test file path.
+[ 2026-05-28 22:47:17,195 ] 88 root - INFO - Exported train and test file path
+[ 2026-05-28 22:47:17,196 ] 17 root - INFO - Data ingestion completed and artifact is created
+[ 2026-05-28 22:47:17,205 ] 23 root - INFO - Initiate the data validation
+[ 2026-05-28 22:47:17,286 ] 36 root - INFO - Required number of columns: 31
+[ 2026-05-28 22:47:17,286 ] 37 root - INFO - Dataframe has columns: 31
+[ 2026-05-28 22:47:17,286 ] 36 root - INFO - Required number of columns: 31
+[ 2026-05-28 22:47:17,286 ] 37 root - INFO - Dataframe has columns: 31
+[ 2026-05-28 22:47:17,620 ] 25 root - INFO - Data validation completed and artifact is created
+[ 2026-05-28 22:47:17,621 ] 20 root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Data Transformation log started.<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+[ 2026-05-28 22:47:17,621 ] 31 root - INFO - Initiate the data transformation
+[ 2026-05-28 22:47:17,621 ] 49 root - INFO - Obtaining training and testing file path.
+[ 2026-05-28 22:47:17,621 ] 53 root - INFO - Loading training and testing data as pandas dataframe.
+[ 2026-05-28 22:47:17,696 ] 57 root - INFO - Splitting input and target feature from training and testing dataframe.
+[ 2026-05-28 22:47:17,699 ] 37 root - INFO - Entering get_data_transformer_object method of DataTransformation class.
+[ 2026-05-28 22:47:17,712 ] 73 root - INFO - Concatenating transformed input features and target feature for training and testing data.
+[ 2026-05-28 22:47:17,714 ] 77 root - INFO - Saving transformed training and testing array.
+[ 2026-05-28 22:47:17,723 ] 80 root - INFO - Saving preprocessor object.
+[ 2026-05-28 22:47:17,723 ] 41 root - INFO - Entered the save_object method of Main Utils class
+[ 2026-05-28 22:47:17,729 ] 46 root - INFO - Exited the save_object method of Main Utils class
+[ 2026-05-28 22:47:17,729 ] 82 root - INFO - Data transformation completed successfully.
+[ 2026-05-28 22:47:17,731 ] 33 root - INFO - Data transformation completed and artifact is created
+[ 2026-05-28 22:47:17,731 ] 36 root - INFO - Initiate the model trainer
+[ 2026-05-28 22:47:17,731 ] 41 root - INFO - Model trainer initiated
+[ 2026-05-28 22:47:17,731 ] 130 root - INFO - Loading transformed training data
+[ 2026-05-28 22:47:17,755 ] 137 root - INFO - Splitting training data into X and y
+[ 2026-05-28 22:47:17,755 ] 144 root - INFO - Training model
+[ 2026-05-28 23:07:03,047 ] 52 root - INFO - Entered the load_object method of Main Utils class
+[ 2026-05-28 23:07:03,064 ] 41 root - INFO - Entered the save_object method of Main Utils class
+[ 2026-05-28 23:07:03,126 ] 46 root - INFO - Exited the save_object method of Main Utils class
+[ 2026-05-28 23:07:03,127 ] 120 root - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='Artifacts\\05_28_2026_22_45_46\\model_trainer\\trained_model\\model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9913087417887823, precision_score=0.9892093586123437, recall_score=0.9934170548916346), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9844834626378114, precision_score=0.9808787632221319, recall_score=0.9881147540983607))
+[ 2026-05-28 23:07:03,133 ] 43 root - INFO - Model trainer artifact created
