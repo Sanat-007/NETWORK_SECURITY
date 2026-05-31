@@ -330,17 +330,6 @@ docker run -p 8000:8000 network-security
 
 ---
 
-## Future Improvements
-
-- CI/CD Pipeline Integration
-- Model Registry Support
-- Cloud Deployment
-- Automated Retraining
-- Monitoring Dashboard
-- Feature Store Integration
-
----
-
 ## Learning Outcomes
 
 Through this project, I gained practical experience with:
