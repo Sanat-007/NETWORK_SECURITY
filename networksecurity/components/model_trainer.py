@@ -125,6 +125,8 @@ class ModelTrainer:
             Network_model = NetworkModel(preprocessor=preprocessor,model=best_model)
             save_object(file_path=self.model_trainer_config.trained_model_file_path,obj=Network_model)
 
+            save_object(file_path="final_models/model.pkl", obj=Network_model)
+
             ## Model trainer artifact
             model_trainer_artifact = ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,train_metric_artifact=train_classification_metrics,test_metric_artifact=test_classification_metrics)  #type: ignore
             logging.info(f"Model trainer artifact: {model_trainer_artifact}")
